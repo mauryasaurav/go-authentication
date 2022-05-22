@@ -1,18 +1,20 @@
-### Welcome 👋
+# go-proxies
 
-[![My GitHub Language Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=mauryasaurav&langs_count=5&theme=tokyonight)]()
+# Used
+GORM, Clean Architecture, CRUD Api, postres, jwt-go
 
-[![My GitHub Stats](https://github-readme-stats.vercel.app/api/?username=mauryasaurav&count_private=true&theme=tokyonight&showicons=true)]()
 
-<!--
-**mauryasaurav/mauryasaurav** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-Here are some ideas to get you started:
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### Pre-requisites
+- [Gorm](https://github.com/go-gorm/gorm)
+- [Go JWT](**https://medium.com/swlh/proxy-server-in-golang-43e2365d9cbc**)
+
+
+## Installation
+
+A little intro about the installation. 
+```
+$ https://github.com/mauryasaurav/go-authentication.git
+$ cd go-authentication
+$ go mod tidy
+$ go run cmd/main.go
+```

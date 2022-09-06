@@ -1,0 +1,169 @@
+openapi: 3.0.0
+info:
+  title: Swagger Free Switch
+  version: 1.0.0
+servers:
+- url: http://localhost:8090
+
+paths:
+  /_health:
+    get:
+      summary: Check health
+      operationId: health
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                   type: integer
+                   description: message
+                   example: ok  
+  /api/v1/call-link:
+    get:
+      summary: Call on phone number
+      security:
+       - cookieAuth: []
+      operationId: call-link
+      parameters:
+      - name: number
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: success and returns some html text
+  /api/v1/assign-number:
+    get:
+      summary: Assign a number
+      security:
+       - cookieAuth: []
+      operationId: assign-number
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/assignNumberResp'
+  /api/v1/call-recording:
+    get:
+      security:
+       - cookieAuth: []
+      summary: Fetch call recordings
+      operationId: call-recording
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/callrecordingResp'
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: auth_session 
+  schemas:
+    callrecordingResp:
+      type: array
+      items:
+        $ref: '#/components/schemas/numberResp'
+    numberResp:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+          example: 2
+        provider:
+          type: integer
+          description: provider
+          example: 0
+        didnumber:
+          type: integer
+          description: didnumber
+          example: 0
+        hangup_cause:
+          type: string
+          description: hangup clause
+          example: NORMAL_CLEARING
+        call_to:
+          type: string
+          description: call to
+          example: 1005
+        call_from:
+          type: string
+          description: call from
+          example: 1006
+        recording:
+          type: string
+          description: recording
+          example: ""
+        call_direction:
+          type: string
+          description: call direction
+          example: outbound
+        call_uuid:
+          type: string
+          description: call id
+          example: 3e926aae-0b03-11ed-a6cf-9dde3cd1ca46
+        bill_duration:
+          type: string
+          description: bill duration
+          example: 10
+        domain:
+          type: string
+          description: domain
+          example: phoneai.boomslang.io
+        extension:
+          type: integer
+          description: extension
+          example: 12
+        created_at:
+          type: string
+          description: Created at
+          example: 2022-07-24T03:47:05.82719Z
+        started_at:
+          type: string
+          description: started at
+          example: 2022-07-23T20:46:48Z
+    assignNumberResp:
+      type: object
+      properties:
+        role:
+          type: string
+          description: user role
+          example: role
+        phone_number:
+          type: string
+          description: domain
+          example: "17036879447"
+        auth0_id:
+          type: string
+          description: domain
+          example: "auth0|62e8a7c3e737ec990dca420c"
+        extension:
+          type: string
+          description: extension
+          example: 1004
+        updated_at:
+          type: string
+          description: updated at
+          example: 2022-07-23T20:46:48Z
+        created_at:
+          type: string
+          description: Created at
+          example: 2022-07-24T03:47:05.82719Z
+  parameters:
+    number:
+      name: number
+      in: query
+      required: true
+      schema:
+        type: string

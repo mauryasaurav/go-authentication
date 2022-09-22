@@ -1,4 +1,4 @@
-name: Go
+name: Go Authentication Deployment
 
 on:
   push:
@@ -8,8 +8,12 @@ on:
 
 jobs:
 
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    name: Deploy
+    env:
+      POSTGRES_DB: go-auth
+      POSTGRES_PASSWORD: testing123
     steps:
     - uses: actions/checkout@v3
 
@@ -19,4 +23,15 @@ jobs:
         go-version: 1.18
 
     - name: Build
-      run: go build -v ./...
+      run: go build -v ./...   
+      
+    - name: Run tests
+      run: go test -race -vet=off ./...
+
+    - name: Deploy to Heroku
+      uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+        heroku_email: ${{secrets.HEROKU_EMAIL}}
+        branch: "master"

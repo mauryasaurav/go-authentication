@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,16 @@ import (
 type Auth struct {
 	Username string `json:"user_name"`
 	Password string `json:"password"`
+}
+type Users struct {
+	Id              int64     `json:"id"`
+	FirstName       string    `json:"first_name"`
+	LastName        string    `json:"last_name"`
+	Email           string    `json:"email"`
+	Password        string    `json:"password"`
+	ConfirmPassword string    `json:"confirm_password"`
+	CreatedAt       time.Time `json:"created_at"`
+	UpdatedAt       time.Time `json:"updated_at"`
 }
 
 func extractClaims(tokenStr string) (jwt.MapClaims, bool) {
@@ -72,6 +83,7 @@ func main() {
 	}
 
 	dbConn.AutoMigrate(&Auth{})
+	dbConn.AutoMigrate(&Users{})
 
 	route := gin.Default()
 

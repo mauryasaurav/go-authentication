@@ -1,1 +1,1 @@
-web: gunicorn your_app_name.wsgi --log-file
+web: bin/go-deploy-auth

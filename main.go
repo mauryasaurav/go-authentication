@@ -106,6 +106,10 @@ func main() {
 
 	userUsecase := usecase.NewUserUsecase(userRepo)
 	handler.NewUserHandler(userRoute, userUsecase)
+
 	port := os.Getenv("GO_PORT")
+	if port == "" {
+		port = "8000"
+	}
 	route.Run(":" + port)
 }

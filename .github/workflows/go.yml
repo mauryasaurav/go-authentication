@@ -15,12 +15,12 @@ jobs:
       POSTGRES_DB: go-auth
       POSTGRES_PASSWORD: testing123
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-    run: sudo apt update && sudo apt install heroku neofetch
-    - name: Checking the info
-      run: neofetch
     steps:
     - uses: actions/checkout@v3
 
+    - name: Heroku login
+      run: sudo apt update && sudo apt install heroku
+    
     - name: Set up Go
       uses: actions/setup-go@v3
       with:

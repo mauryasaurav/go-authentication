@@ -16,8 +16,8 @@ jobs:
       POSTGRES_PASSWORD: testing123
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     run: sudo apt update && sudo apt install heroku neofetch
-    name: Checking the info
-    run: neofetch
+    - name: Checking the info
+      run: neofetch
     steps:
     - uses: actions/checkout@v3
 

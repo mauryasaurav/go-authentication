@@ -1,1 +1,1 @@
-web: bin/go-deploy-auth
+web: bin/go-authentication

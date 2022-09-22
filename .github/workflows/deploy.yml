@@ -13,6 +13,7 @@ jobs:
     name: Deploy
     env:
       POSTGRES_DB: go-auth
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: testing123
     steps:
     - uses: actions/checkout@v3

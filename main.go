@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -105,6 +106,6 @@ func main() {
 
 	userUsecase := usecase.NewUserUsecase(userRepo)
 	handler.NewUserHandler(userRoute, userUsecase)
-
-	route.Run(":8001")
+	port := os.Getenv("GO_PORT")
+	route.Run(":" + port)
 }

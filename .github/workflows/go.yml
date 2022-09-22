@@ -17,10 +17,6 @@ jobs:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
     - uses: actions/checkout@v3
-
-    - name: Heroku login
-      run: sudo apt update && sudo apt install heroku
-    
     - name: Set up Go
       uses: actions/setup-go@v3
       with:

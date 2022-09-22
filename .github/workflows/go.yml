@@ -14,6 +14,7 @@ jobs:
     env:
       POSTGRES_DB: go-auth
       POSTGRES_PASSWORD: testing123
+      POSTGRES_USER: postgres
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
     - uses: actions/checkout@v3
@@ -29,9 +30,15 @@ jobs:
       run: go test -race -vet=off ./...
 
     - name: Deploy to Heroku
-      uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-        heroku_email: ${{secrets.HEROKU_EMAIL}}
-        branch: "master"
+      if: github.ref == 'refs/heads/master' && job.status == 'success'
+      run: |
+        git remote add heroku https://${{secrets.HEROKU_API_KEY}}@git.heroku.com/go-deploy-auth.git
+        git push heroku master -f
+
+    # - name: Deploy to Heroku
+    #   uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
+    #   with:
+    #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+    #     heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+    #     heroku_email: ${{secrets.HEROKU_EMAIL}}
+    #     branch: "master"

@@ -17,7 +17,10 @@ jobs:
       POSTGRES_USER: postgres
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
-    - uses: actions/checkout@v3
+
+    - name: Checkout
+      uses: actions/checkout@v3
+  
     - name: Set up Go
       uses: actions/setup-go@v3
       with:

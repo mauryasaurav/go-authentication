@@ -19,4 +19,3 @@ $ cd go-authentication
 $ go mod tidy
 $ go run cmd/main.go
 ```
-
